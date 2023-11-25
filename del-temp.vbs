@@ -1,0 +1,11 @@
+Set fso = CreateObject("Scripting.FileSystemObject")
+Set oshell = CreateObject("WScript.Shell")
+EmptyFolder=oshell.ExpandEnvironmentStrings("%userprofile%") & "\Empty"
+
+if NOT (fso.folderexists(EmptyFolder)) Then fso.CreateFolder(EmptyFolder)
+
+oShell.run "robocopy ""%userprofile%\Empty"" ""%tmp%"" /purge", 0, true
+
+if (fso.folderexists(EmptyFolder)) Then fso.DeleteFolder(EmptyFolder)
+
+MsgBox "Delete temp file successful!", vbInformation, "Notification"
